@@ -13,7 +13,7 @@ Recreate a shopping cart page in React. Your final product should function simil
 Take the existing markup rendered from the `ShoppingCart` component in `src/components/ShoppingCart.js` and change into a fully functioning component. This means that you only have to add functionality -- not markup or styling -- to the existing code!
 
 
-## Getting Started
+## Steps
 
 It looks like there's a lot of complicated code here in `src/components/ShoppingCart.js` but really it's all just display. Take a minute to look at the `ShoppingCart` component.
 
@@ -102,12 +102,12 @@ So we have some items with set prices. It would make sense for these to be repre
 
 ```js
 const itemsInCart =[
-  { 
+  {
     name: "Gaiam Kids Yoga Headband - Pink/Blue",
     cost: 9.38,
     imgUrl: "https://scene7-secure.targetimg1.com/is/image/Target/39598742?wid=90&hei=90",
     quantityInCart: 1
-  }, { 
+  }, {
     name: "Hamburger Helper",
     cost: 11.52,
     imgUrl: "https://scene7-secure.targetimg1.com/is/image/Target/12953828?wid=90&hei=90",
@@ -131,6 +131,16 @@ constructor(props) {
 }
 ```
 
-### Next Steps
+### Steps To Take Moving Forward
 
-You'll next need to add methods, event handler methods, and event listeners.
+1. In Your Cart component, you will need to create `updateQuantity` and `calcTotal` methods as well as event listeners for those methods
+2. You will want to create a nested component for `CartItem`.
+  * Create `CartItem` in a separate file and import it into `ShoppingCart`
+  * Use `.map` to iterate through your `items`, and return `<CartItem />` with appropriate properties.  
+  * Move the code for individual items out of `ShoppingCart` and into the `CartItem` component.
+  * You will also need to pass `CartItem` the `updateQuantity` method as `props`.  
+3. Replace hard-coded data with the variables referencing `itemsInCart`
+4. When `CartItem` calls `updateQuantity` you will want to update state with a new quantity.
+  * **NOTE**: Be very careful when updating a nested state.  React won't let you directly update part of a nested object in state.  The best way to do this is to make a `copy` of what you want to update.  Update the copy, then set the state property equal to the updated copy.  
+  * `let itemCopy = this.state.items.slice()` creates a *copy*.
+  * `let notACopy = this.state.items` creates a *reference*, do not use to update state!
